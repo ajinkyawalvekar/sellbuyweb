@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers - SellBuyWeb</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50">
+    <!-- Header -->
+    <header class="bg-blue-700 text-white py-6 text-center text-2xl font-bold shadow-md">
+        <h1>SellBuyWeb - Developers</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white py-4">
+        <div class="max-w-4xl mx-auto flex justify-between items-center px-4">
+            <button id="menu-toggle" class="text-white md:hidden">☰</button>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:underline">Home</a>
+                <a href="pricing.html" class="hover:underline">Pricing</a>
+                <a href="developers.html" class="hover:underline">Developers</a>
+                <a href="contact.html" class="hover:underline">Contact Us</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden text-center md:hidden">
+            <a href="index.html" class="block py-2 hover:bg-blue-500">Home</a>
+            <a href="pricing.html" class="block py-2 hover:bg-blue-500">Pricing</a>
+            <a href="developers.html" class="block py-2 hover:bg-blue-500">Developers</a>
+            <a href="contact.html" class="block py-2 hover:bg-blue-500">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="max-w-4xl mx-auto p-6">
+        <input id="search" type="text" placeholder="Search by name or profession..." 
+               class="w-full p-3 border rounded-lg mb-6 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
+               onkeyup="searchDeveloper()">
+    </div>
+
+    <!-- Developer List -->
+    <div id="developer-list" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+        <!-- Example Developer -->
+        <div class="bg-white p-6 rounded-lg shadow-md border border-blue-200">
+            <h3 class="text-xl font-bold text-blue-800">John Doe</h3>
+            <p class="text-gray-600">Website Developer</p>
+            <a href="#" class="text-blue-500 hover:underline">View Portfolio</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md border border-blue-200">
+            <h3 class="text-xl font-bold text-blue-800">Jane Smith</h3>
+            <p class="text-gray-600">App Developer</p>
+            <a href="#" class="text-blue-500 hover:underline">View Portfolio</a>
+        </div>
+    </div>
+
+    <!-- JavaScript for Search & Mobile Menu -->
+    <script>
+        function searchDeveloper() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let developers = document.getElementById("developer-list").getElementsByTagName("div");
+            
+            for (let dev of developers) {
+                let name = dev.getElementsByTagName("h3")[0].innerText.toLowerCase();
+                let profession = dev.getElementsByTagName("p")[0].innerText.toLowerCase();
+                
+                dev.style.display = name.includes(input) || profession.includes(input) ? "block" : "none";
+            }
+        }
+
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
+</body>
+</html>

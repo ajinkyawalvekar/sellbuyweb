@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SellBuyWeb</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            color: #333;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .button-3d {
+            perspective: 1000px;
+        }
+
+        .button-3d button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-3d button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background-color: #2563eb;
+        }
+
+        .button-3d button:active {
+            transform: translateY(2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-button {
+            background-color: #f97316;
+        }
+
+        .popup-button:hover {
+            background-color: #ea580c;
+        }
+
+        .input-field {
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-blue-50">
+    <header class="bg-blue-700 text-white py-6 text-center text-2xl font-bold shadow-md animate-fade-in">
+        <h1>SellBuyWeb</h1>
+    </header>
+
+    <nav class="bg-blue-600 text-white py-4 animate-fade-in">
+        <div class="max-w-4xl mx-auto flex justify-between items-center px-4">
+            <button id="menu-toggle" class="text-white md:hidden">☰</button>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:underline">Home</a>
+                <a href="pricing.html" class="hover:underline">Pricing</a>
+                <a href="developers.html" class="hover:underline">Developers</a>
+                <a href="contact.html" class="hover:underline">Contact Us</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden text-center md:hidden">
+            <a href="index.html" class="block py-2 hover:bg-blue-500">Home</a>
+            <a href="pricing.html" class="block py-2 hover:bg-blue-500">Pricing</a>
+            <a href="developers.html" class="block py-2 hover:bg-blue-500">Developers</a>
+            <a href="contact.html" class="block py-2 hover:bg-blue-500">Contact Us</a>
+        </div>
+    </nav>
+
+    <section class="max-w-4xl mx-auto bg-white p-8 mt-8 shadow-lg rounded-lg animate-fade-in">
+        <h2 class="text-3xl font-semibold text-blue-700 text-center">Contact Us</h2>
+        <p class="text-lg text-gray-700 text-center mt-2">Have a question? Send us a message!</p>
+
+        <div class="text-center mt-4">
+            <p class="text-lg text-gray-800">Email:</p>
+            <a href="mailto:sellbuyweb.org@gmail.com" class="text-blue-500 font-semibold hover:underline">
+                sellbuyweb.org@gmail.com
+            </a>
+        </div>
+
+        <form id="contactForm" class="mt-6 space-y-4">
+            <input type="text" id="name" placeholder="Your Name" class="w-full p-3 border rounded-lg input-field" required>
+            <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border rounded-lg input-field" required>
+            <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 border rounded-lg input-field" required></textarea>
+            
+            <div class="button-3d">
+                <button type="button" onclick="sendMessage()">Send Message</button>
+            </div>
+        </form>
+
+        <center><b><p>*We will respond to your message within 3 to 4 days.</p></b></center>
+    </section>
+
+    <div id="popupMessage" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p class="text-lg text-gray-800 mb-4">Direct message us on our website!</p>
+            <div class="button-3d">
+                <button class="popup-button" onclick="closePopup()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+
+        function sendMessage() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            if (!name || !email || !message) {
+                alert("Please fill all fields before sending!");
+                return;
+            }
+
+            let isLaptop = window.innerWidth > 768;
+            if (isLaptop) {
+                let mailtoLink = `mailto:sellbuyweb.org@gmail.com?subject=Contact%20Form%20Message&body=Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
+                window.location.href = mailtoLink;
+            } else {
+                document.getElementById("popupMessage").classList.remove("hidden");
+            }
+        }
+
+        function closePopup() {
+            document.getElementById("popupMessage").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
